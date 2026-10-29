@@ -1,0 +1,112 @@
+/* ===== Projects Component CSS (Clean Architectural Polygon System) ===== */
+
+/* ---- 8-Point Tactical Armor Polygon Project Card ---- */
+.project-polygon-card {
+	clip-path: polygon(
+		16px 0%,
+		calc(100% - 16px) 0%,
+		100% 16px,
+		100% calc(100% - 16px),
+		calc(100% - 16px) 100%,
+		16px 100%,
+		0% calc(100% - 16px),
+		0% 16px
+	) !important;
+	border-radius: 0 !important;
+}
+
+.project-card {
+	transform-style: preserve-3d;
+	will-change: transform;
+	transition:
+		border-color 0.4s ease,
+		box-shadow 0.4s ease;
+}
+
+/* ---- Clean Sci-Fi Chamfer Image Banner Frame ---- */
+.project-img-frame {
+	clip-path: polygon(
+		10px 0%,
+		100% 0%,
+		100% calc(100% - 10px),
+		calc(100% - 10px) 100%,
+		0% 100%,
+		0% 10px
+	) !important;
+	border-radius: 0 !important;
+	position: relative;
+	overflow: hidden;
+	background: #080a0e;
+}
+
+/* ---- Tactical Corner Brackets ---- */
+.hud-corner-tl {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	width: 12px;
+	height: 12px;
+	border-top: 2px solid rgba(0, 255, 65, 0.6);
+	border-left: 2px solid rgba(0, 255, 65, 0.6);
+	z-index: 15;
+	pointer-events: none;
+	transition: all 0.3s ease;
+}
+
+.hud-corner-tr {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 12px;
+	height: 12px;
+	border-top: 2px solid rgba(0, 255, 65, 0.6);
+	border-right: 2px solid rgba(0, 255, 65, 0.6);
+	z-index: 15;
+	pointer-events: none;
+	transition: all 0.3s ease;
+}
+
+.hud-corner-bl {
+	position: absolute;
+	bottom: 8px;
+	left: 8px;
+	width: 12px;
+	height: 12px;
+	border-bottom: 2px solid rgba(0, 255, 65, 0.6);
+	border-left: 2px solid rgba(0, 255, 65, 0.6);
+	z-index: 15;
+	pointer-events: none;
+	transition: all 0.3s ease;
+}
+
+.hud-corner-br {
+	position: absolute;
+	bottom: 8px;
+	right: 8px;
+	width: 12px;
+	height: 12px;
+	border-bottom: 2px solid rgba(0, 255, 65, 0.6);
+	border-right: 2px solid rgba(0, 255, 65, 0.6);
+	z-index: 15;
+	pointer-events: none;
+	transition: all 0.3s ease;
+}
+
+.project-card:hover .hud-corner-tl,
+.project-card:hover .hud-corner-tr,
+.project-card:hover .hud-corner-bl,
+.project-card:hover .hud-corner-br {
+	border-color: #00ff41;
+	box-shadow: 0 0 8px #00ff41;
+}
+
+/* ---- Card Hover state ---- */
+@media (hover: hover) {
+	.project-card:hover {
+		border-color: color-mix(in srgb, var(--project-color, var(--accent)) 50%, transparent) !important;
+		box-shadow:
+			0 0 0 1px color-mix(in srgb, var(--project-color, var(--accent)) 30%, transparent),
+			0 24px 50px rgba(0, 0, 0, 0.85),
+			0 0 35px color-mix(in srgb, var(--project-color, var(--accent)) 20%, transparent);
+	}
+}

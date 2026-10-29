@@ -1,0 +1,573 @@
+/* ===== Hero Component CSS ===== */
+
+/* Interactive Grid Background with Cursor Flashlight Mask */
+.hero-grid-bg {
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+	background-size: 64px 64px;
+	background-position: center center;
+
+	/* Mouse flashlight effect: reveals grid lines only around cursor */
+	mask-image: radial-gradient(
+		350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+		black 20%,
+		rgba(0, 0, 0, 0.1) 60%,
+		transparent 100%
+	);
+	-webkit-mask-image: radial-gradient(
+		350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+		black 20%,
+		rgba(0, 0, 0, 0.1) 60%,
+		transparent 100%
+	);
+	opacity: 0.85;
+	transition: opacity 0.5s ease;
+	z-index: 1;
+}
+
+@keyframes float-orb-1 {
+	0% {
+		transform: translate(0, 0) scale(1);
+	}
+	100% {
+		transform: translate(90px, 60px) scale(1.15);
+	}
+}
+
+@keyframes float-orb-2 {
+	0% {
+		transform: translate(0, 0) scale(1);
+	}
+	100% {
+		transform: translate(-110px, -70px) scale(1.2);
+	}
+}
+
+@keyframes float-orb-3 {
+	0% {
+		transform: translate(0, 0) scale(1);
+	}
+	100% {
+		transform: translate(70px, -90px) scale(1.1);
+	}
+}
+
+/* Title Glitch / Color Aberration Hover Styling */
+.hero-title {
+	text-shadow: 0 0 30px rgba(255, 255, 255, 0.03);
+	position: relative;
+	transition: text-shadow 0.3s ease;
+	z-index: 10;
+}
+
+@media (min-width: 768px) {
+	.hero-title span {
+		display: inline-block;
+		transition:
+			transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+			text-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+			color 0.25s ease;
+		cursor: default;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+	.hero-title span:first-child:hover {
+		transform: skewX(-5deg) scale(1.008);
+		text-shadow:
+			-2px 0 var(--accent),
+			2px 0 rgba(255, 0, 100, 0.5),
+			0 0 35px rgba(0, 255, 65, 0.2);
+		color: #ffffff;
+	}
+
+	.hero-title span:last-child:hover {
+		transform: skewX(5deg) scale(1.008);
+		text-shadow:
+			2px 0 var(--accent),
+			-2px 0 rgba(0, 150, 255, 0.5),
+			0 0 35px rgba(0, 255, 65, 0.2);
+		color: #ffffff;
+	}
+	}
+}
+
+/* Pause ambient orb animation when hero is offscreen */
+#home:not(.is-visible) .hero-ambient-glow {
+	animation-play-state: paused !important;
+}
+#home:not(.is-visible) .hero-ambient-glow-cyan {
+	animation-play-state: paused !important;
+}
+
+/* Tagline highlights with bottom-left to right hover push effect */
+.hero-tagline-highlight {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.hero-tagline-highlight::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -2px;
+	width: 100%;
+	height: 1.5px;
+	transform: scaleX(0);
+	transform-origin: bottom left;
+	transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	opacity: 0.9;
+}
+
+.hero-tagline-highlight:hover::after {
+	transform: scaleX(1);
+}
+
+.hero-tagline-highlight--blue::after {
+	background: linear-gradient(90deg, #3b82f6, #60a5fa);
+	box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
+}
+
+.hero-tagline-highlight--green::after {
+	background: linear-gradient(90deg, #10b981, #34d399);
+	box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+}
+
+.hero-tagline-highlight--amber::after {
+	background: linear-gradient(90deg, #f59e0b, #fbbf24);
+	box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+}
+
+/* Rotating text container and push animations */
+.tagline-rotate-container {
+	vertical-align: middle;
+}
+
+/* Base styles for rotating items to overlap exactly in-flow and absolute */
+.tagline-exit-item {
+	position: absolute;
+	left: 0;
+	top: 0;
+	white-space: nowrap;
+	text-align: left;
+}
+
+.tagline-enter-item {
+	position: relative;
+	display: inline-block;
+	white-space: nowrap;
+	text-align: left;
+}
+
+/* Exiting item: slides out from center to the top (bottom to top push) */
+.tagline-exit-item {
+	animation: slide-out-to-top 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	transform-origin: center top;
+}
+
+/* Entering item: slides in from the bottom to center (bottom to top push) */
+.tagline-enter-item {
+	animation: slide-in-from-bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	transform-origin: center bottom;
+}
+
+/* Glowing laser sweep line that shoots across the entering text */
+.tagline-enter-item::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -2px;
+	width: 100%;
+	height: 1.5px;
+	background: linear-gradient(90deg, transparent, currentColor, transparent);
+	animation: laser-sweep 0.6s ease-in-out forwards;
+}
+
+@keyframes laser-sweep {
+	0% {
+		transform: scaleX(0);
+		opacity: 0;
+		transform-origin: left;
+	}
+	50% {
+		transform: scaleX(1);
+		opacity: 1;
+		transform-origin: left;
+	}
+	51% {
+		transform-origin: right;
+	}
+	100% {
+		transform: scaleX(0);
+		opacity: 0;
+		transform-origin: right;
+	}
+}
+
+@keyframes slide-in-from-bottom {
+	0% {
+		opacity: 0;
+		transform: translateY(24px) scale(0.96) rotate(1deg);
+		filter: blur(2px) brightness(1.6);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0) scale(1) rotate(0deg);
+		filter: blur(0) brightness(1);
+	}
+}
+
+@keyframes slide-out-to-top {
+	0% {
+		opacity: 1;
+		transform: translateY(0) scale(1) rotate(0deg);
+		filter: blur(0) brightness(1);
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(-24px) scale(0.96) rotate(-1deg);
+		filter: blur(2px) brightness(0.8);
+	}
+}
+
+/* Background scanning grid laser line */
+.hero-grid-bg {
+	position: relative;
+}
+
+.hero-grid-bg::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background: linear-gradient(90deg, transparent, var(--accent), transparent);
+	opacity: 0.12;
+	box-shadow: 0 0 10px var(--accent);
+	animation: grid-scan-laser 8s linear infinite;
+}
+
+@keyframes grid-scan-laser {
+	0% {
+		top: -10%;
+	}
+	100% {
+		top: 110%;
+	}
+}
+
+/* Unified interactive tech badge hover state (Neon Green glow) */
+.tech-badge-interactive:hover {
+	border-color: var(--accent) !important;
+	background-color: rgba(0, 255, 65, 0.1) !important;
+	box-shadow: 0 0 15px rgba(0, 255, 65, 0.15);
+}
+
+/* Sonar sweep vector line animation */
+/* CPU Core Reactor Rotating Ring Animations */
+.cpu-rotor-cw {
+	transform-origin: center;
+	transform-box: viewBox;
+	animation: rotate-clockwise 14s infinite linear;
+}
+
+.cpu-rotor-ccw {
+	transform-origin: center;
+	transform-box: viewBox;
+	animation: rotate-counter-clockwise 8s infinite linear;
+}
+
+@keyframes rotate-clockwise {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes rotate-counter-clockwise {
+	from {
+		transform: rotate(360deg);
+	}
+	to {
+		transform: rotate(0deg);
+	}
+}
+
+/* Circuit trace flowing dashed line animation */
+.cpu-trace-active {
+	animation: flow-circuit-dashes 0.5s infinite linear;
+}
+
+@keyframes flow-circuit-dashes {
+	to {
+		stroke-dashoffset: -8;
+	}
+}
+
+/* Central core pulsing wavefront wave */
+.reactor-wave {
+	fill: none;
+	stroke-width: 0.75;
+	opacity: 0;
+	transform-origin: center;
+	transform-box: viewBox;
+	animation: pulse-wave-sweep 4s infinite cubic-bezier(0.1, 0.8, 0.25, 1);
+	pointer-events: none;
+}
+
+@keyframes pulse-wave-sweep {
+	0% {
+		transform: scale(0.15);
+		opacity: 0.8;
+		stroke-width: 1.5px;
+	}
+	15% {
+		opacity: 0.6;
+	}
+	100% {
+		transform: scale(0.96);
+		opacity: 0;
+		stroke-width: 0.4px;
+	}
+}
+
+/* Butter-smooth hardware-accelerated 3D hologram tilt container (Active on hover-supported devices only) */
+@media (hover: hover) {
+	.radar-interactive-container {
+		transition: transform 0.4s cubic-bezier(0.1, 0.8, 0.25, 1);
+		transform-style: preserve-3d;
+		will-change: transform;
+		backface-visibility: hidden;
+	}
+}
+
+/* Radar activation halo shield circle (Always dashed, expands on hover) */
+.radar-halo-circle {
+	fill: none;
+	stroke: var(--accent);
+	stroke-width: 0.75;
+	stroke-dasharray: 2 4;
+	opacity: 0;
+	transform: scale(0.88);
+	transform-origin: center;
+	transform-box: viewBox;
+	transition:
+		transform 0.6s cubic-bezier(0.15, 0.85, 0.35, 1),
+		opacity 0.6s ease,
+		stroke 0.3s ease,
+		stroke-width 0.3s ease;
+}
+
+.radar-interactive-container:hover .radar-halo-circle {
+	opacity: 0.45;
+	transform: scale(1.01);
+}
+
+/* Active technology hover triggers additional scale and glow updates on the outer circle */
+.radar-halo-circle.active-grow {
+	opacity: 0.7 !important;
+	transform: scale(1.03) !important;
+	stroke-width: 1.5px !important;
+}
+
+/* Shaded capability polygon hover transformations */
+.radar-capability-poly {
+	transition:
+		fill-opacity 0.3s ease,
+		stroke-width 0.3s ease,
+		filter 0.3s ease,
+		stroke 0.3s ease;
+}
+
+.radar-capability-poly:hover {
+	fill-opacity: 0.25 !important;
+	stroke: #ffffff !important;
+	stroke-width: 2.5px !important;
+	filter: drop-shadow(0 0 10px var(--accent));
+}
+
+/* Oscilloscope frequency wave flowing keyframe animation */
+.oscilloscope-active {
+	animation: flow-oscilloscope 1.2s infinite linear;
+}
+
+@keyframes flow-oscilloscope {
+	to {
+		stroke-dashoffset: -12;
+	}
+}
+
+/* Hexadecimal matrix code background scroll */
+.matrix-scroll-text {
+	font-size: 3.5px;
+	fill: rgba(255, 255, 255, 0.02);
+	letter-spacing: 1.5px;
+	transform-origin: center;
+	transform-box: viewBox;
+	animation: matrix-code-scroll 18s infinite linear;
+	user-select: none;
+	pointer-events: none;
+}
+
+@keyframes matrix-code-scroll {
+	from {
+		transform: translateY(-80px);
+	}
+	to {
+		transform: translateY(80px);
+	}
+}
+
+/* Emitter laser core upward data flow */
+.hologram-laser-active {
+	stroke-dasharray: 6 4;
+	animation: flow-laser-up 0.8s infinite linear;
+}
+
+@keyframes flow-laser-up {
+	to {
+		stroke-dashoffset: -10;
+	}
+}
+
+/* Radial Technology Constellation slow floating */
+.floating-constellation {
+	animation: float-constellation 10s infinite ease-in-out;
+}
+
+@keyframes float-constellation {
+	0%,
+	100% {
+		transform: translateY(0px) rotate(0deg);
+	}
+	50% {
+		transform: translateY(-6px) rotate(0.4deg);
+	}
+}
+
+/* Satellite nodes lightweight transitions and scaling */
+.radial-node {
+	transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	transform-origin: var(--origin-x) var(--origin-y);
+}
+
+.radial-node:hover {
+	transform: scale(1.08);
+}
+
+/* EQ segment breathing */
+.eq-segment-breathe {
+	animation: eq-breath 2.5s infinite ease-in-out;
+}
+
+@keyframes eq-breath {
+	0%,
+	100% {
+		opacity: 0.65;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+/* Radar sweep laser spinner */
+.radar-sweep-hand {
+	animation: radar-spin 4.5s linear infinite;
+}
+
+/* 3D Cube styling */
+.cyber-3d-cube {
+	transform-style: preserve-3d;
+	transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cube-face {
+	position: absolute;
+	width: 96px;
+	height: 96px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: rgba(10, 10, 10, 0.95);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	backface-visibility: visible;
+	user-select: none;
+	pointer-events: auto;
+	transition: all 0.4s ease;
+}
+
+.face-front {
+	transform: rotateY(0deg) translateZ(48px);
+}
+.face-back {
+	transform: rotateY(180deg) translateZ(48px);
+}
+.face-left {
+	transform: rotateY(-90deg) translateZ(48px);
+}
+.face-right {
+	transform: rotateY(90deg) translateZ(48px);
+}
+.face-top {
+	transform: rotateX(90deg) translateZ(48px);
+}
+.face-bottom {
+	transform: rotateX(-90deg) translateZ(48px);
+}
+
+/* Auto spinning keyframes */
+.cube-auto-spin {
+	animation: spin-cube 18s infinite linear;
+}
+
+/* Locking rotation transition */
+.cube-locked-transition {
+	transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Pause animations when prefers-reduced-motion is active */
+@media (prefers-reduced-motion: reduce) {
+	.floating-constellation {
+		animation: none !important;
+	}
+	.radial-node {
+		transition: none !important;
+	}
+	[className^="orbit-container-"] {
+		animation: none !important;
+	}
+}
+
+/* Mobile Performance & Battery Optimization (Screens < 1024px) */
+@media (max-width: 1023px) {
+	/* Turn off floating orbs, laser grid sweeps, and dynamic scans to save CPU/GPU cycle draw calls */
+	.hero-grid-bg::after {
+		display: none !important;
+		animation: none !important;
+	}
+	.hero-ambient-glow::before,
+	.hero-ambient-glow::after,
+	.hero-ambient-glow-cyan {
+		display: none !important;
+		animation: none !important;
+	}
+	/* Turn off background matrix hex scrolling on mobile */
+	.matrix-scroll-text {
+		display: none !important;
+		animation: none !important;
+	}
+}
+
+/* Glitch Title text styling */
+.hero-glitch-text {
+	text-shadow: 3px 3px 0px rgba(0, 255, 65, 0.15);
+}
+
+/* =========================================
+   VITE.DEV ISOMETRIC STACK
+   ========================================= */

@@ -1,0 +1,68 @@
+/* ===== Timeline / Orbit Progression CSS (Clip-Path Polygon System) ===== */
+
+/* 1. 8-Point Tactical Timeline Polygon Card */
+.timeline-polygon-card {
+	clip-path: polygon(
+		16px 0%,
+		calc(100% - 16px) 0%,
+		100% 16px,
+		100% calc(100% - 16px),
+		calc(100% - 16px) 100%,
+		16px 100%,
+		0% calc(100% - 16px),
+		0% 16px
+	) !important;
+	border-radius: 0 !important;
+}
+
+/* 2. 15° Slanted Year Badge */
+.timeline-year-badge {
+	clip-path: polygon(
+		10px 0%,
+		100% 0%,
+		calc(100% - 10px) 100%,
+		0% 100%
+	) !important;
+	border-radius: 0 !important;
+}
+
+/* 3. 6-Point Micro-Chamfer Phase Badge */
+.timeline-phase-badge {
+	clip-path: polygon(
+		6px 0%,
+		calc(100% - 6px) 0%,
+		100% 6px,
+		100% calc(100% - 6px),
+		calc(100% - 6px) 100%,
+		6px 100%,
+		0% calc(100% - 6px),
+		0% 6px
+	) !important;
+	border-radius: 0 !important;
+}
+
+/* Cosmic Radar Scope Backdrop Layer */
+.timeline-radar-bg {
+	position: absolute;
+	inset: 0;
+	background-image: 
+		radial-gradient(circle, rgba(0, 255, 65, 0.015) 1.5px, transparent 1.5px),
+		radial-gradient(circle, transparent 30%, rgba(255,255,255,0.003) 30.5%, rgba(255,255,255,0.003) 31%, transparent 31.5%),
+		radial-gradient(circle, transparent 65%, rgba(255,255,255,0.002) 65.5%, rgba(255,255,255,0.002) 66%, transparent 66.5%);
+	background-size: 32px 32px, 200px 200px, 400px 400px;
+	background-position: center center;
+	pointer-events: none;
+	z-index: 0;
+	opacity: 0.85;
+}
+
+/* CRT-like glow effects on active orbit nodes */
+.active-glow {
+	box-shadow: 0 0 20px rgba(0, 255, 65, 0.35);
+}
+
+/* Accessible focus states */
+button:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 4px;
+}

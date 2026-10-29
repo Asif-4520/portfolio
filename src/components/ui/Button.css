@@ -1,0 +1,221 @@
+/* =========================================================
+   HIGH-IMPACT 2-VARIANT SCI-FI POLYGON BUTTON SYSTEM
+   ========================================================= */
+
+/* Base Button Structure */
+.cyber-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  text-decoration: none;
+  border-radius: 0 !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s ease,
+              color 0.3s ease,
+              box-shadow 0.3s ease;
+  will-change: transform, box-shadow;
+  overflow: hidden;
+}
+
+/* Tactile Active Press */
+.cyber-btn:active {
+  transform: scale(0.97) !important;
+}
+
+/* Button Content Container */
+.cyber-btn-content {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.cyber-btn-text {
+  text-shadow: none !important;
+}
+
+/* Icon Animations */
+.cyber-btn-icon {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-btn:hover .cyber-btn-icon-left {
+  transform: translateX(-2.5px);
+}
+
+.cyber-btn:hover .cyber-btn-icon-right {
+  transform: translateX(2.5px);
+}
+
+/* =========================================================
+   1. CREATIVE POLYGON CLIP-PATH SHAPES
+   ========================================================= */
+
+/* Shape 1: Slanted Cyber Blade (15° Parallel Slant) */
+.cyber-btn-blade {
+  clip-path: polygon(
+    14px 0%,
+    100% 0%,
+    calc(100% - 14px) 100%,
+    0% 100%
+  ) !important;
+}
+
+/* Shape 2: 8-Point Armor Chamfer (Sci-Fi Dock Box) */
+.cyber-btn-chamfer {
+  clip-path: polygon(
+    8px 0%,
+    calc(100% - 8px) 0%,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0% calc(100% - 8px),
+    0% 8px
+  ) !important;
+}
+
+/* =========================================================
+   2. PIXEL-PERFECT BORDER MASK (::before) & SHIMMER FLARE (::after)
+   ========================================================= */
+
+/* Pixel-Perfect Border Stroke Following Clip-Path */
+.cyber-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  background: currentColor;
+  clip-path: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  pointer-events: none;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  z-index: 2;
+}
+
+/* Smooth Pure CSS Shimmer Laser Wipe Flare (::after) */
+.cyber-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.cyber-btn:hover::after {
+  transform: translateX(380%) skewX(-25deg);
+}
+
+/* =========================================================
+   3. SIZES
+   ========================================================= */
+
+.cyber-btn-sm {
+  padding: 0.55rem 1.45rem;
+  font-size: 11px;
+}
+
+.cyber-btn-sm .cyber-btn-icon {
+  width: 13px;
+  height: 13px;
+}
+
+.cyber-btn-md {
+  padding: 0.75rem 1.95rem;
+  font-size: 12px;
+}
+
+.cyber-btn-md .cyber-btn-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.cyber-btn-lg {
+  padding: 1rem 2.6rem;
+  font-size: 13px;
+}
+
+.cyber-btn-lg .cyber-btn-icon {
+  width: 17px;
+  height: 17px;
+}
+
+/* =========================================================
+   4. EXACT 2 BUTTON TYPES (Primary & Outline)
+   ========================================================= */
+
+/* TYPE 1: Primary Button (Soft Matte White -> Hover Solid Neon Green) */
+.cyber-btn-primary {
+  background-color: rgba(240, 243, 246, 0.88) !important;
+  color: #000000 !important;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+}
+
+.cyber-btn-primary::before {
+  background-color: rgba(240, 243, 246, 0.88) !important;
+}
+
+.cyber-btn-primary:hover {
+  background-color: var(--accent, #00ff41) !important;
+  color: #000000 !important;
+  box-shadow: 0 0 28px rgba(0, 255, 65, 0.65), 0 0 15px rgba(0, 255, 65, 0.4);
+  transform: translateY(-2px) scale(1.025);
+}
+
+.cyber-btn-primary:hover::before {
+  background-color: var(--accent, #00ff41) !important;
+}
+
+/* TYPE 2: Outline Glass with Bright Glowing Green Border & Text */
+.cyber-btn-outline {
+  background-color: rgba(0, 255, 65, 0.08) !important;
+  color: #00ff41 !important;
+  box-shadow: 0 0 16px rgba(0, 255, 65, 0.2);
+  backdrop-filter: blur(16px);
+}
+
+.cyber-btn-outline::before {
+  background-color: #00ff41 !important;
+}
+
+.cyber-btn-outline:hover {
+  background-color: #00ff41 !important;
+  color: #000000 !important;
+  box-shadow: 0 0 28px rgba(0, 255, 65, 0.6);
+  transform: translateY(-2px) scale(1.025);
+}
+
+.cyber-btn-outline:hover::before {
+  background-color: #00ff41;
+}
+
+/* Disabled State */
+.cyber-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}

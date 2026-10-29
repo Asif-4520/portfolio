@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+:root {
+	/* ===== Brand ===== */
+	--accent: #00ff41;
+	--accent-light: #52ff7a;
+	--accent-dark: #00c933;
+
+	/* ===== Background ===== */
+	--bg: #050505;
+	--surface: #0a0c10;
+	--surface-2: #12151c;
+	--surface-3: #1a1e27;
+
+	/* ===== Text ===== */
+	--text: #f5f5f5;
+	--text-muted: #9ca3af;
+	--text-dim: #6b7280;
+
+	/* ===== Borders ===== */
+	--border: rgba(255, 255, 255, 0.1);
+	--border-accent: rgba(0, 255, 65, 0.35);
+	
+	/* ===== Glow ===== */
+	--glow-sm: 0 0 10px rgba(0, 255, 65, 0.25);
+	--glow-md: 0 0 20px rgba(0, 255, 65, 0.35);
+	--glow-lg: 0 0 40px rgba(0, 255, 65, 0.5);
+	
+	/* ===== Tooltip ===== */
+	--tooltip-bg: #0a0c10;
+	--tooltip-text: #ffffff;
+	--tooltip-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+	
+	/* ===== Radius ===== */
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 16px;
+	--radius-xl: 24px;
+	
+	/* ===== Timing ===== */
+	--duration-fast: 150ms;
+	--duration-normal: 250ms;
+	--duration-slow: 400ms;
+	
+	--ease: cubic-bezier(0.22, 1, 0.36, 1);
+	
+	/* Next.js next/font/local variable font mapping */
+	--font-base: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+	--font-heading: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+	--font-ibm: var(--font-ibm-plex), "IBM Plex Sans", sans-serif;
+}
+
+@theme {
+	--color-accent: var(--accent);
+	--color-accent-light: var(--accent-light);
+	--color-accent-dark: var(--accent-dark);
+	
+	--color-bg: var(--bg);
+	--color-surface: var(--surface);
+	--color-surface-2: var(--surface-2);
+	--color-surface-3: var(--surface-3);
+
+	--color-text: var(--text);
+	--color-text-muted: var(--text-muted);
+	--color-text-dim: var(--text-dim);
+	
+	--color-border: var(--border);
+	--color-border-accent: var(--border-accent);
+
+	--radius-sm: var(--radius-sm);
+	--radius-md: var(--radius-md);
+	--radius-lg: var(--radius-lg);
+	--radius-xl: var(--radius-xl);
+
+	--shadow-glow-sm: var(--glow-sm);
+	--shadow-glow-md: var(--glow-md);
+	--shadow-glow-lg: var(--glow-lg);
+	--shadow-tooltip: var(--tooltip-shadow);
+
+	--ease-custom: var(--ease);
+
+	--font-sans: var(--font-base);
+	--font-heading: var(--font-heading);
+	--font-ibm: var(--font-ibm);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: var(--font-base);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	background-color: #050505;
+	color: #f5f5f5;
+	position: relative;
+}
+
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background-image: 
+		linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+	background-size: 64px 64px;
+	background-position: center center;
+	pointer-events: none;
+	z-index: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font-heading);
+	letter-spacing: -0.02em;
+	color: var(--text, #ffffff);
+}
+
+button {
+	font-family: var(--font-ibm);
+	font-weight: 600;
+}
+
+::selection {
+	background-color: rgba(0, 255, 0, 0.226);
+	color: #ffffff;
+}
+
+/* Custom Cyber Neon Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(0, 255, 65, 0.4);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #00ff41;
+	box-shadow: 0 0 10px #00ff41;
+}
+
+/* Touch devices should not keep pointer hover states after tapping. */
+@media (hover: none), (pointer: coarse) {
+	.cyber-btn:hover::after,
+	.cyber-btn:hover .cyber-btn-icon-left,
+	.cyber-btn:hover .cyber-btn-icon-right {
+		transform: none;
+	}
+
+	.cyber-btn-primary:hover {
+		background-color: rgba(240, 243, 246, 0.88) !important;
+		box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+		transform: none;
+	}
+
+	.cyber-btn-primary:hover::before {
+		background-color: rgba(240, 243, 246, 0.88) !important;
+	}
+
+	.cyber-btn-outline:hover {
+		background-color: rgba(0, 255, 65, 0.08) !important;
+		color: #00ff41 !important;
+		box-shadow: 0 0 16px rgba(0, 255, 65, 0.2);
+		transform: none;
+	}
+
+	.cyber-btn-outline:hover::before {
+		background-color: #00ff41;
+	}
+
+	.armor-skill-card:hover,
+	.cyber-hex-wrapper:hover {
+		transform: none;
+	}
+
+	.armor-skill-card:hover {
+		background: rgba(255, 255, 255, 0.08);
+		box-shadow: none;
+	}
+
+	.armor-skill-card:hover .armor-ambient-glow,
+	.cyber-hex-wrapper:hover .hex-ambient-glow {
+		opacity: 0.15;
+	}
+
+	.armor-skill-card:hover .armor-icon-box,
+	.cyber-hex-wrapper:hover .hex-icon-box {
+		transform: none;
+		border-color: rgba(255, 255, 255, 0.08);
+		background: rgba(0, 0, 0, 0.5);
+		box-shadow: none;
+	}
+
+	.cyber-hex-wrapper:hover .cyber-hex-outer {
+		background: rgba(255, 255, 255, 0.12);
+		filter: none;
+	}
+
+	.about-holo-beacon:hover,
+	.hud-command-dock:hover,
+	.hud-node-item:hover,
+	.hud-pipeline-step:hover {
+		transform: none;
+	}
+
+	.hero-tagline-highlight:hover::after {
+		transform: scaleX(0);
+	}
+
+	.tech-badge-interactive:hover {
+		border-color: rgba(255, 255, 255, 0.1) !important;
+		background-color: transparent !important;
+		box-shadow: none;
+	}
+
+	.project-card:hover {
+		border-color: rgba(255, 255, 255, 0.1) !important;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+	}
+
+	.project-card:hover .hud-corner-tl,
+	.project-card:hover .hud-corner-tr,
+	.project-card:hover .hud-corner-bl,
+	.project-card:hover .hud-corner-br {
+		border-color: rgba(0, 255, 65, 0.6);
+		box-shadow: none;
+	}
+
+	.footer-link:hover::before {
+		content: "";
+		margin-right: 0;
+	}
+}

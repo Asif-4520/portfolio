@@ -1,0 +1,76 @@
+/* ===== TACTICAL HUD COMMAND DECK POLISHED STYLES ===== */
+
+.hud-command-dock {
+  clip-path: polygon(
+    18px 0%,
+    calc(100% - 18px) 0%,
+    100% 18px,
+    100% calc(100% - 18px),
+    calc(100% - 18px) 100%,
+    18px 100%,
+    0% calc(100% - 18px),
+    0% 18px
+  ) !important;
+  border-radius: 0 !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-command-dock:hover {
+  border-color: rgba(0, 255, 65, 0.75) !important;
+  box-shadow: 0 0 35px rgba(0, 255, 65, 0.25), inset 0 0 20px rgba(0, 255, 65, 0.12) !important;
+}
+
+.hud-node-item {
+  position: relative;
+  border-left: 4px solid #00ff41;
+  background: rgba(10, 12, 16, 0.95);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-node-item:hover {
+  transform: translateX(8px);
+  border-color: #00ff41 !important;
+  background: linear-gradient(135deg, rgba(7,38,16,0.95) 0%, rgba(10,12,16,0.98) 100%);
+  box-shadow: 0 0 22px rgba(0, 255, 65, 0.25) !important;
+}
+
+.hud-blade-tag {
+  clip-path: polygon(
+    10px 0%,
+    100% 0%,
+    calc(100% - 10px) 100%,
+    0% 100%
+  ) !important;
+  border-radius: 0 !important;
+}
+
+/* Radar Pulse Beacon */
+.about-holo-beacon {
+  position: relative;
+}
+
+.about-holo-beacon::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 255, 65, 0.6);
+  animation: about-beacon-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes about-beacon-ping {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.hud-pipeline-step {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-pipeline-step:hover {
+  background: #00ff41 !important;
+  color: #000000 !important;
+  border-color: #00ff41 !important;
+  box-shadow: 0 0 18px rgba(0, 255, 65, 0.6) !important;
+  transform: translateY(-2px);
+}
